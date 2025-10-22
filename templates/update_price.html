@@ -1,0 +1,24 @@
+<!-- templates/update_price.html -->
+{% extends 'base.html' %}
+{% block title %}Update Price{% endblock %}
+
+{% block content %}
+<h2>Update Price for {{ product.name }}</h2>
+<p>Current Price: ₹{{ product.current_price }}</p>
+
+<h3>Last 10 Price Changes</h3>
+<ul>
+    {% for change in price_history %}
+        <li>₹{{ change.old_price }} on {{ change.updated_at|date:"M d, Y H:i" }} by {{ change.updated_by.username }}</li>
+    {% empty %}
+        <li>No history available.</li>
+    {% endfor %}
+</ul>
+
+<form method="post">
+    {% csrf_token %}
+    <label for="new_price">New Price:</label>
+    <input type="number" step="0.01" name="new_price" required>
+    <button type="submit">Update</button>
+</form>
+{% endblock %}

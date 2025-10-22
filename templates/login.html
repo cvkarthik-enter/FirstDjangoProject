@@ -1,0 +1,21 @@
+<!-- templates/login.html -->
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+{% if request.GET.logged_out %}
+    <p style="color: green;">You have been logged out successfully.</p>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    <label for="id_username">Username:</label>
+    <input type="text" name="username" id="id_username" required><br>
+
+    <label for="id_password">Password:</label>
+    <input type="password" name="password" id="id_password" required><br>
+
+    <button type="submit">Login</button>
+</form>
+
+{% endblock %}

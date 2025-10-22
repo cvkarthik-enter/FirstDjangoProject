@@ -1,0 +1,30 @@
+<!-- templates/base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Price Tracker{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav style="background-color: #333; color: white; padding: 10px;">
+            <span>Welcome, {{ user.username }}</span>
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}" style="float:right; margin:0;">
+                    {% csrf_token %}
+                    <button type="submit" style="background:none; border:none; color:white; text-decoration:none; cursor:pointer;">
+                        Logout
+                    </button>
+                </form>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main style="margin: 20px;">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

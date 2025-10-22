@@ -1,0 +1,26 @@
+<!-- templates/price_list.html -->
+{% extends 'base.html' %}
+{% block title %}Current Prices{% endblock %}
+
+{% block content %}
+<h2>{{ page_title }}</h2>
+<!-- Table of prices -->
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        {% if user.is_staff %}
+            <th>Actions</th>
+        {% endif %}
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>₹{{ product.current_price }}</td>
+        {% if user.is_staff %}
+            <td><a href="{% url 'update_price' product.id %}">Update</a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
