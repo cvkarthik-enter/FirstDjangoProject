@@ -13,4 +13,7 @@ urlpatterns = [
 
     # Admin-only price update
     path('update/<int:product_id>/', views.update_price_view, name='update_price'),
+
+    # Admin-only create new product
+    path('create/', views.create_product_view, name="create_product"),
 ]
