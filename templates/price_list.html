@@ -4,6 +4,13 @@
 
 {% block content %}
 <h2>{{ page_title }}</h2>
+
+  {# Show "Add new product" link only to admin/staff users #}
+  {% if user.is_staff %}
+    <p><a class="btn btn-primary" href="{% url 'create_product' %}">Add new product</a></p>
+  {% endif %}
+
+  
 <!-- Table of prices -->
 <table>
     <tr>
