@@ -9,7 +9,7 @@
 <h3>Last 10 Price Changes</h3>
 <ul>
     {% for change in price_history %}
-        <li>₹{{ change.old_price }} on {{ change.updated_at|date:"M d, Y H:i" }} by {{ change.updated_by.username }}</li>
+        <li>₹{{ change.old_price }} on {{ change.updated_at|date:"d M, Y H:i" }} by {{ change.updated_by.username }}</li>
     {% empty %}
         <li>No history available.</li>
     {% endfor %}

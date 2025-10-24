@@ -70,7 +70,7 @@ class CreateProductViewTests(TestCase):
         response = self.client.post(self.create_url, data=payload, follow=True)
         self.assertEqual(Product.objects.count(), before_count)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Enter valid price")
+        self.assertContains(response, "Enter valid price (e.g. 199.99).")
 
     def test_post_negative_price_shows_error_and_does_not_create(self):
         self.client.login(username="admin", password="pass")
