@@ -1,20 +1,31 @@
-<!-- templates/create_product.html -->
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
 {% block title %}Create New Product{% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    <label for="id_username">
-    Product name:
-    <input type="text" name="name" required>
-    </label>
-    <br>
-    <label for="id_username">
-    Current price:
-    <input type="text" name="current_price" required>
-    </label>
-    <br>
-    <button type="submit">Create product</button>
-</form>
+  <div class="card" style="max-width:720px;">
+    <h1>Create New Product</h1>
+
+    <p><a class="btn secondary" href="{% url 'price_list' %}">← Back to price list</a></p>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <div class="form-row">
+        <label>Product name
+          <input type="text" name="name" required>
+        </label>
+      </div>
+
+      <div class="form-row">
+        <label>Current price
+          <input type="text" name="current_price" required>
+        </label>
+      </div>
+
+      <div class="row">
+        <button class="btn" type="submit">Create product</button>
+        <a class="btn ghost" href="{% url 'price_list' %}">Cancel</a>
+      </div>
+    </form>
+  </div>
 {% endblock %}

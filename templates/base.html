@@ -2,50 +2,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Price List{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <meta charset="utf-8">
+  <title>{% block title %}Price List{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+  <div class="container">
     <header>
-        <nav style="background-color: #333; color: white; padding: 10px;">
-            <div style="display:flex; align-items:center; gap:16px;">
-                <a href="{% url 'price_list' %}" style="color: white; text-decoration: none; font-weight: bold;">Home</a>
+      <nav>
+        <div class="nav-left">
+          <a class="nav-link" href="{% url 'price_list' %}">Home</a>
+          {% if user.is_authenticated and user.is_staff %}
+            <a class="nav-link" href="{% url 'create_product' %}">Add product</a>
+          {% endif %}
+        </div>
 
-                {% if user.is_authenticated and user.is_staff %}
-                  <a href="{% url 'create_product' %}" style="color: white; text-decoration:none;">Add product</a>
-                {% endif %}
-            </div>
-
-            <div style="margin-left:auto;">
-            {% if user.is_authenticated %}
-                <span style="margin-right:12px;">Welcome, {{ user.username }}</span>
-                <form method="post" action="{% url 'logout' %}" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" style="background:none; border:none; color:white; text-decoration:underline; cursor:pointer;">
-                        Logout
-                    </button>
-                </form>
-            {% else %}
-                <a href="{% url 'login' %}" style="color: white;">Login</a>
-            {% endif %}
-            </div>
-        </nav>
+        <div class="nav-right">
+          {% if user.is_authenticated %}
+            <span style="color:white; font-weight:600;">Welcome, {{ user.username }}</span>
+            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+              {% csrf_token %}
+              <button class="nav-link" type="submit" style="background:transparent; border:none; padding:6px 10px;">Logout</button>
+            </form>
+          {% else %}
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          {% endif %}
+        </div>
+      </nav>
     </header>
 
-    <main style="margin: 20px;">
-        {# Messages block — render django.contrib.messages site-wide #}
-        {% if messages %}
-          <div id="messages" style="margin-bottom: 16px;">
-            {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" style="padding:8px; border-radius:4px; margin-bottom:8px; background:#f2f2f2;">
-                {{ message }}
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
+    <main>
+      {% if messages %}
+        <div id="messages">
+          {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} card">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
 
-        {% block content %}{% endblock %}
+      {% block content %}{% endblock %}
+      <div class="footer-note">Made with ❤️ — PriceListCopilot</div>
     </main>
+  </div>
 </body>
 </html>

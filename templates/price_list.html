@@ -1,33 +1,40 @@
-<!-- templates/price_list.html -->
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
 {% block title %}Current Prices{% endblock %}
 
 {% block content %}
-<h2>{{ page_title }}</h2>
+  <div class="card">
+    <div class="row" style="align-items:center; margin-bottom:12px;">
+      <h1>{{ page_title }}</h1>
+      <div class="spacer"></div>
+      {% if user.is_staff %}
+        <a class="btn" href="{% url 'create_product' %}">Add new product</a>
+      {% endif %}
+    </div>
 
-  {# Show "Add new product" link only to admin/staff users #}
-  {% if user.is_staff %}
-    <p><a class="btn btn-primary" href="{% url 'create_product' %}">Add new product</a></p>
-  {% endif %}
-
-  
-<!-- Table of prices -->
-<table>
-    <tr>
-        <th>Product</th>
-        <th>Price</th>
-        {% if user.is_staff %}
-            <th>Actions</th>
-        {% endif %}
-    </tr>
-    {% for product in products %}
-    <tr>
-        <td>{{ product.name }}</td>
-        <td>₹{{ product.current_price }}</td>
-        {% if user.is_staff %}
-            <td><a href="{% url 'update_price' product.id %}">Update</a></td>
-        {% endif %}
-    </tr>
-    {% endfor %}
-</table>
+    <div class="table-wrapper">
+      <table class="table" aria-describedby="product-list">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Current price</th>
+            {% if user.is_staff %}<th>Actions</th>{% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <tr>
+            <td>{{ product.name }}</td>
+            <td class="price">₹{{ product.current_price }}</td>
+            {% if user.is_staff %}
+              <td><a class="btn secondary" href="{% url 'update_price' product.id %}">Edit price</a></td>
+            {% endif %}
+          </tr>
+          {% empty %}
+          <tr><td colspan="{% if user.is_staff %}3{% else %}2{% endif %}">No products found.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 {% endblock %}

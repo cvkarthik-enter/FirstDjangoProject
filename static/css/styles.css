@@ -1,37 +1,145 @@
-/* static/css/styles.css */
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f9f9f9;
+/* Clean, minimal UI for PriceListCopilot */
+/* Put this at static/css/styles.css */
+
+/* Base reset + sensible defaults */
+:root{
+  --bg:#f7f9fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#0b6efd; /* primary color */
+  --danger:#e11d48;
+  --success:#059669;
+  --radius:8px;
+  --shadow: 0 6px 18px rgba(15,23,42,0.06);
+  --max-width:1024px;
+  --gap:16px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: light;
 }
 
-header nav {
-    background-color: #333;
-    color: white;
-    padding: 10px;
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+  padding:24px;
 }
 
-header nav a {
-    color: white;
-    margin-left: 20px;
-    text-decoration: none;
+/* Page wrapper */
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:20px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+/* Header / nav */
+header nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:linear-gradient(90deg,#0b6efd 0%, #0a58ca 100%);
+  color:white;
+  padding:12px 20px;
+  border-radius:12px;
+  box-shadow:var(--shadow);
+}
+.nav-left, .nav-right{display:flex; align-items:center; gap:12px;}
+a.nav-link{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  padding:6px 10px;
+  border-radius:6px;
+}
+a.nav-link:hover{ background: rgba(255,255,255,0.06); }
+
+/* Card / content */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow);
+  margin-top:18px;
 }
 
-th, td {
-    padding: 10px;
-    border: 1px solid #ccc;
-}
+/* Headings */
+h1{ margin:0 0 12px 0; font-size:1.25rem; font-weight:700; color:#0b1531; }
 
-button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
+/* Buttons */
+.btn{
+  display:inline-block;
+  background:var(--accent);
+  color:white;
+  padding:8px 12px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+}
+.btn.secondary{ background:#f3f4f6; color:#111827; box-shadow:none; border:1px solid #e5e7eb; }
+.btn.ghost{ background:transparent; color:var(--accent); border:1px solid rgba(11,110,253,0.12); }
+
+/* Messages (alerts) */
+#messages .alert{
+  padding:10px 12px;
+  border-radius:8px;
+  margin-bottom:12px;
+  font-weight:600;
+}
+.alert-info{ background:#eef2ff; color:#3730a3; }
+.alert-success{ background:#ecfdf5; color:#065f46; }
+.alert-error{ background:#fff1f2; color:#9f1239; }
+
+/* Table */
+.table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px;
+}
+.table thead th{
+  text-align:left;
+  padding:10px 12px;
+  font-size:0.85rem;
+  color:var(--muted);
+  border-bottom:1px solid #eef2f5;
+}
+.table tbody td{
+  padding:12px;
+  border-bottom:1px solid #f1f5f9;
+  vertical-align:middle;
+}
+.table tbody tr:hover{ background:#fbfdff; }
+.price{ font-weight:700; color:#111827; }
+
+/* Responsive table: scroll on small screens */
+.table-wrapper{ overflow-x:auto; }
+
+/* Form */
+form label{ display:block; margin-bottom:8px; font-size:0.95rem; color:#111827; }
+input[type="text"], input[type="password"]{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid #e6eef6;
+  background: #fff;
+  margin-top:6px;
+}
+.form-row{ margin-bottom:12px; max-width:420px; }
+
+/* Utilities */
+.row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.spacer{ flex:1; }
+
+/* Footer small */
+.footer-note{ color:var(--muted); font-size:0.85rem; margin-top:12px; }
+
+/* Small screens */
+@media (max-width:640px){
+  header nav{ flex-direction:column; align-items:flex-start; gap:12px; }
+  .nav-right{ margin-left:0; }
 }
