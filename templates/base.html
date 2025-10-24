@@ -21,10 +21,13 @@
         <div class="nav-right">
           {% if user.is_authenticated %}
             <span style="color:white; font-weight:600;">Welcome, {{ user.username }}</span>
-            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+
+            {# logout as a small form with a styled button using nav-link class #}
+            <form method="post" action="{% url 'logout' %}" style="display:inline; margin-left:8px;">
               {% csrf_token %}
-              <button class="nav-link" type="submit" style="background:transparent; border:none; padding:6px 10px;">Logout</button>
+              <button class="nav-link" type="submit">Logout</button>
             </form>
+
           {% else %}
             <a class="nav-link" href="{% url 'login' %}">Login</a>
           {% endif %}

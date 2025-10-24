@@ -48,14 +48,28 @@ header nav{
   box-shadow:var(--shadow);
 }
 .nav-left, .nav-right{display:flex; align-items:center; gap:12px;}
-a.nav-link{
+
+/* Apply the same nav-link styles to anchors, buttons, or any element with the class */
+.nav-link{
   color:white;
   text-decoration:none;
   font-weight:600;
   padding:6px 10px;
   border-radius:6px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  line-height:1;
 }
-a.nav-link:hover{ background: rgba(255,255,255,0.06); }
+
+/* Make sure anchor hover and button hover look the same */
+.nav-link:hover{ background: rgba(255,255,255,0.06); }
+
+/* If you still want explicit anchor-only rules, keep them but they are not required now:
+a.nav-link{ ... } */
 
 /* Card / content */
 .card{

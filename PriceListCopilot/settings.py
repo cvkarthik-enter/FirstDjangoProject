@@ -126,3 +126,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/prices/'
 
 LOGOUT_REDIRECT_URL = '/login/'
+
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+# Where collectstatic will gather files for production (optional; used by collectstatic)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+ALLOWED_HOSTS = ['192.168.29.215', 'localhost', '127.0.0.1']
